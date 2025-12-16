@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tugas 5 - Rantai Metode jQuery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      #notification {
+        width: 300px;
+        padding: 15px;
+        text-align: center;
+        color: rgb(9, 220, 220);
+        background-color: #eef8; /* Warna awal (abu-abu) */
+        border-radius: 5px;
+        /* Memastikan elemen tersembunyi dan tidak memakan ruang saat dimulai */
+        display: none;
+        opacity: 0;
+      }
+      #notification1 {
+        width: 300px;
+        padding: 15px;
+        text-align: center;
+        color: rgb(9, 220, 220);
+        background-color: #eef8; /* Warna awal (abu-abu) */
+        border-radius: 5px;
+        /* Memastikan elemen tersembunyi dan tidak memakan ruang saat dimulai */
+        display: none;
+        opacity: 0;
+      }
+      .container {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Notifikasi Animasi Chaining</h2>
+    <button id="show-btn">Tampilkan Notifikasi</button>
+
+    <div class="container">
+      <div id="notification">Apa Kabar</div>
+      <div id="notification1">Sudah Makan?</div>    
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $("#show-btn").click(function () {
+          // reset
+          $("#notification, #notification1", "notification2")
+            .stop(true, true)
+            .css({ display: "none", opacity: 0 });
+
+          // notif 1
+          $("#notification")
+            .css("background-color", "green")
+            .animate({ opacity: 1, height: "toggle" }, 600)
+            .delay(2000)
+            .animate({ opacity: 0, height: "toggle" }, 600, function () {
+              // notif 2 (baru jalan setelah notif 1 selesai)
+              $("#notification1")
+                .css("background-color", "green")
+                .animate({ opacity: 1, height: "toggle" }, 600)
+                .delay(2000)
+                .animate({ opacity: 0, height: "toggle" }, 600);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>
